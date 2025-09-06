@@ -1,0 +1,31 @@
+{
+  "name": "synapsis",
+  "version": "1.0.0",
+  "description": "an email reader and summariser with integrated AI capabilities ",
+  "main": "server.js",
+  "type ": "module",
+  "scripts": {
+    "start": "node server",
+    "test": "jest",
+    "dev": "node --watch --env-file=.env server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ian-Agama/synapsis.git"
+  },
+  "author": "Ian Agama and Timothy Mwangi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ian-Agama/synapsis/issues"
+  },
+  "homepage": "https://github.com/Ian-Agama/synapsis#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "googleapis": "^159.0.0",
+    "node-appwrite": "^18.0.0",
+    "nodemon": "^3.1.10"
+  }
+}

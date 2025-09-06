@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trial entry point </title>
+</head>
+<body>
+    
+        <!--<h1> Hello Welcome</h1>-->
+        <div class="main">
+            <div>Welcome There</div>
+            <a href="" id="login">
+                <span>Sign in with Google</span>
+            </a>
+        </div>
+    
+</body>
+<script>
+    let url = 'http://localhost:3001/auth';
+
+
+    document.getElementById('login').addEventListener('click', async (e) => {
+        e.preventDefault();
+        //window.location
+        try{
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data.url) {
+                window.location = data.url; // Redirect to the URL provided by the backend
+            }
+        }catch(error){
+            console.error('Error fetching the auth URL:', error);   
+        }
+
+    });
+    
+    
+
+</script>
+
+</html>
