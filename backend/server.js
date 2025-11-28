@@ -1,42 +1,23 @@
 import express from "express"
-import {google} from "googleapis"
-import { googleApi } from "./emailServices.js"   
-//import { openAsBlob } from "fs"
-import cors from "cors"
+import { oauthUrl, getToken, readEmail } from "./auth.js";
 
+const app = express();
+const port = 3000;
 
-const app = express()
-const port = 3001 
-app.use(cors());
-app.get('/', async(req, res )=> 
-{
-    res.send("Google Oath ssr demo")
-})
-
-app.get('/auth', async (req,res) => {
-    try {
-        const ouath2Client = googleApi();
-        const url = ouath2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: ["https://www.googleapis.com/auth/gmail.readonly"] // Correct scope
-        })  
-        res.json({status :200,url})
-    }catch( error){
-        console.log(error); // sends an error if the message is not met 
-    }
-})
-app.get('/auth/callback', async (req,res)=>{
-    try{
-        const code = req.query.code;
-        const {oauth2Client} = await getTokens(code);
-        const emails = await fetchEmails(oauth2Client);
-        res.json({emails});
-
-    }catch(error){
-        console.log(error);
-
-    }
-})
-app.listen(port, ()=> {
-    console.log(`port is listening ${port}`)
+app.get('/', (req, res) => {
+    const url = oauthUrl();
+    res.send(`<a href="${url}">Auth with google</a>`);
 });
+
+app.get('/auth', async (req, res) => {
+    try {
+        const { code } = req.query;
+        const auth = await getToken(code);
+        readEmail(auth, res);
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+});
+
+app.listen(port, () => console.log(`Backend server running at http://localhost:${port}`));

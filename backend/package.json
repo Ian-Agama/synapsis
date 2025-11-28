@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "an email reader and summariser with integrated AI capabilities ",
   "main": "server.js",
-  "type ": "module",
+  "type": "module",
   "scripts": {
     "start": "node server",
     "test": "jest",
@@ -24,8 +24,11 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "google-auth-library": "^10.5.0",
     "googleapis": "^159.0.0",
-    "node-appwrite": "^18.0.0",
+    "node-appwrite": "^18.0.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }
